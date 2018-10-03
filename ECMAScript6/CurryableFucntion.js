@@ -1,7 +1,18 @@
-var applyCoupon = (category)=>(discount)=>(item)=>{
-    if(category!=item.category) return {};
-    item.price = item.price * (1-discount);
-  
+
+
+var applyCoupon=function(category){
+return function(discount){
+        return function(item){
+            if(item.category===category){
+                item.price=item.price-(item.price*discount);
+                return item;
+                           }
+            else{
+                return {};
+            }
+               
+        }
+}
 }
 const item = {
     "name":"Biscuits",
@@ -11,5 +22,5 @@ const item = {
 }
 
 
-console.log(applyCoupon("food")(0.1)(item).price===1.8);
+console.log(applyCoupon("Food")(0.1)(item).price===1.8);
 
