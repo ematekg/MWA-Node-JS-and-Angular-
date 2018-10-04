@@ -1,0 +1,19 @@
+1. we sometimes might want to use setImmediate instead of SetTimeout if
+we want the callback to run immeadiatley after IO event`s callbacks
+
+2. process.nextTick is unique in that it is not part of the event loop,it 
+is processed after current operation completes and before event loop continues(including setImmediate).
+setImmediate on the other hand is part of the event loop and runs on the check phase of the event loop
+after IO event`s callbacks.
+
+3. Node Js`s Core Modules:
+        util
+        Events
+        path
+        http
+        https
+        fs
+        Zlib
+        V8
+        dns
+        stream
