@@ -6,7 +6,7 @@ http.createServer(function(req,resp){
 resp.end(img);
 }).listen(8081,()=>{console.log('start server on port 8081')})
 
-//with stream
+//with streams
 
 http.createServer(function(req,resp){
     resp.setHeader('content-type','image/png');
