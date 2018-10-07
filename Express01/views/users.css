@@ -1,0 +1,10 @@
+.column{
+    padding:2px;
+    border-bottom: 1px solid rgb(51, 50, 50);
+    border-right: 1px solid rgb(51, 50, 50);
+}
+#tablehead
+{
+    font-weight:bold;
+    background-color: #ccccff; 
+}

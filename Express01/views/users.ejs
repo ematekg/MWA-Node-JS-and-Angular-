@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Express Users</title>
+        <link rel="stylesheet" type='text/css' href="users.css">
+    </head>
+    <body>
+        <div id="users">
+                    <table>
+                        <tr id="tablehead"><td class="column">ID</td><td class="column">Name</td><td class="column">UserName</td>
+                        <td class="column">Email</td><td class="column">City</td><td class="column">ZipCode</td>
+                        <td class="column">Latitude</td><td class="column">Longitude</td><td class="column">Website</td>
+                        </tr>
+                        <% for(var i=0;i<users.length;i++) { %>
+                        <tr class="row">
+                                <td class="column"><%=users[i].id%></td>
+                                <td class="column"><%=users[i].name%></td>
+                                <td class="column"><%=users[i].username%></td>
+                                <td class="column"><%=users[i].email%></td>
+                                <td class="column"><%=users[i].address.city%></td>
+                                <td class="column"><%=users[i].address.zipcode%></td>                               
+                                <td class="column"><%=users[i].address.geo.lat%></td>
+                                <td class="column"><%=users[i].address.geo.lng%></td>   
+                                <td class="column"><%=users[i].website%></td>  
+                                                   
+                        </tr>
+                        <% } %>
+                    </table>
+                    
+         </div>
+    </body>
+</html>
