@@ -1,52 +1,44 @@
-const express = require('express');
-const path = require('path');
-const fetch = require('node-fetch');
-const RX = require('rxjs/Rx');
-const {from,Observable} = RX;
-const app = express();
+const express=require('express');
+const axios=require('axios');
+const {from}=require('rxjs');
+const {map}=require('rxjs/operators');
 
-app.set('views',path.join(__dirname,'views'));
-app.set('view engine','ejs');
-app.set('x-powered-by','false');
+
+const app=express();
+app.set('trust proxy',true);
 app.set('strict routing',true);
+app.set('x-powered-by',false);
 app.enable('case sensitive routing');
-app.enable('trust proxy');
 
-app.use(express.static('views'))
+//using prmoises
 
-app.get('/users',(req,res)=>
-{
-    const fetchusers=fetch('http://jsonplaceholder.typicode.com/users');
-    var fetchPromise=fetchusers.then(users=>{return users.json()});
-    //Using Promise
-    // fetchPromise.then(jsonusers=>{
-    //        res.render("users",{"users":jsonusers});
-    // }).catch((error)=>console.log(error));
+app.get('/users',(req,resp)=>{
+    axios.get('http://jsonplaceholder.typicode.com/users/').then(
+        data=> resp.send(data.data)
+    ).catch(e=>console.log(e))
 
-    //Using Async Await
-    // async function renderUsers()
-    // {
-    // try{
-    //     let jsonusers=await fetchPromise;
-    //     console.log(jsonusers);
-    //     res.render("users",{"users":jsonusers});
-    // }
-    // catch(error)
-    // {
-    //     console.log(error);
-    // }
-    // }
-    // renderUsers();
+})
+let result;
 
-    //Using Rx Observables
-    Observable.from(fetchPromise).subscribe(
-        (jsonusers)=>{
-            console.log(jsonusers);
-            res.render("users",{"users":jsonusers});
-        },
-        (error)=>{ console.log(error);}
-    )
+//using Observables
 
-});
+app.get('/users',(req,resp)=>{
+    from(axios.get('http://jsonplaceholder.typicode.com/users/'))
+    .pipe(map(data=>data.data))
+    .subscribe(data=>resp.send(data))
+    
+    })
+    app.listen(3000,()=>console.log('server started on port 3000...'))
+    
+//using Aynch and wait
 
-app.listen(1111);
+app.get('/users',async (req,resp)=>{
+  
+        try{
+            result = await axios.get('http://jsonplaceholder.typicode.com/users/') ;
+            resp.send(result.data);
+        }catch(error){
+            console.log(error);
+        }
+    
+})
