@@ -1,0 +1,13 @@
+{
+"_id": objectID(),
+"ISBN": '',
+"title": '',
+"keywords": ['',''],
+"students": {
+            "studentId" : '',
+            "chekcOutDate": ,
+            "returnDate": 
+            }
+
+
+}
