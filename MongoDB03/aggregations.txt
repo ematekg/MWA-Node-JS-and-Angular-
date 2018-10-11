@@ -1,0 +1,7 @@
+1. db.locations.aggregate([{$match:{state:'IA'}},{$group:{_id:{"state":'$state'},zip_codes:{$addToSet:'$_id'}}},{$project:{_id:0,state:'$_id.state',zip_codes:1}}])
+
+2. db.locations.aggregate([{$match:{pop:{$lt:1000}}},{$project:{_id:0,zip_codes:'$_id'}}])
+
+3. db.locations.aggregate([{$group:{_id:{city:'$city'},zip_codes:{$addToSet:'$_id'},state:{$addToSet:'$state'}}},{$match:{'zip_codes.1':{$exists:true}}},{$unwind:'$state'},{$sort:{'state':1,'_id.city':1}}])
+
+4.db.locations.aggregate([{$sort:{state:1,pop:1}},{$group:{_id:'$state',city:{$first:'$city'},pop:{$first:'$pop'}}}])
