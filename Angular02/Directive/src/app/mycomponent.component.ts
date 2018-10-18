@@ -6,7 +6,7 @@ import { Component, OnInit,Input } from '@angular/core';
   <input #box (keyup)='0'/>{{box.value}}
   <p appMynewcolor [colorvalue]="'red'" (outputcolor)="setcolor($event)" >Teachers</p>
   <ul appMyvisibility [switch]=false>
-  <li  *ngFor="let item of items;let e=even" *ngIf="{{e}}"> {{item}}</li>
+  <li  *ngFor="let item of items" > {{item}}</li>
   </ul>
   <p>An elemnt changed its color to: {{clr}}</p>
   `,
